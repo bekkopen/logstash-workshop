@@ -1,0 +1,6 @@
+data/
+target/
+logstash*.jar
+
+
+.idea/
