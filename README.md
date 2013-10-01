@@ -20,6 +20,11 @@ output {
 }
 ```
 
+Logging application
+===================
+
+This project supplies an application which logs extensively, into a file called ```learning.log```. The application is started with ```mvn jetty:run```, and stopped with Ctrl-C.
+
 
 Tasks
 =====
