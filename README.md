@@ -9,7 +9,7 @@ Startup
 
 
 Example config (logstash.conf):
-```json
+```
 input {
   stdin { type => example }
 }
