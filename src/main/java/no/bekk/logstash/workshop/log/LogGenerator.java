@@ -40,7 +40,7 @@ public class LogGenerator implements Runnable {
                 LOG.warn("Got error while trying to run a log function", e);
             }
             try {
-                Thread.sleep((long) (ThreadLocalRandom.current().nextDouble() * 500));
+                Thread.sleep((long) (ThreadLocalRandom.current().nextDouble() * 2000));
             }
             catch (InterruptedException e) {
                 break;

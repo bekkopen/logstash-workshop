@@ -14,7 +14,7 @@ public class SomeDao {
 
     @LogFunction(weight = 1d)
     public void accessingDatabase() {
-        LOG.info("Finding user, took " + RandomUtils.randomTime(40) + " ms");
+        LOG.info("Finding user in db, took " + RandomUtils.randomTime(40) + " ms");
     }
 
     @LogFunction(weight = 0.0001)
