@@ -34,6 +34,11 @@ public class SomeController {
         LOG.info("Showing page " + randomPage() + ", took " + randomTime(200));
     }
 
+    @LogFunction(weight = 0.01d)
+    public void showErrorPage() {
+        LOG.warn("Got exception while processing request", new RuntimeException("Whooa, an error happened", new RuntimeException()));
+    }
+
     private String randomPage() {
         int value = (int) (pages.size() * random.nextDouble());
         return pages.get(value);

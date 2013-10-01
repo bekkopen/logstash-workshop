@@ -1,11 +1,11 @@
 package no.bekk.logstash.workshop.log;
 
+import no.bekk.logstash.workshop.RandomCollection;
 import no.bekk.logstash.workshop.generators.SomeController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,7 +14,8 @@ import static java.util.Arrays.asList;
 public class LogGenerator implements Runnable {
 
     public static Logger LOG = LoggerFactory.getLogger(LogGenerator.class);
-    private final ArrayList<Logging> logging;
+
+    private final RandomCollection<Logging> logging;
 
     public LogGenerator() {
         List<?> logClasses = asList(
@@ -27,8 +28,7 @@ public class LogGenerator implements Runnable {
     @Override
     public void run() {
         while (!Thread.interrupted()) {
-            int index = ThreadLocalRandom.current().nextInt(0, logging.size());
-            Logging logFunction = logging.get(index);
+            Logging logFunction = logging.next();
             try {
                 logFunction.method.invoke(logFunction.logClass);
             }
@@ -45,8 +45,8 @@ public class LogGenerator implements Runnable {
         LOG.info("Interrupted logging thread, shutting down");
     }
 
-    private ArrayList<Logging> findLogFunctions(List<?> logClasses) {
-        ArrayList<Logging> logging = new ArrayList<Logging>();
+    private RandomCollection<Logging> findLogFunctions(List<?> logClasses) {
+        RandomCollection<Logging> logging = new RandomCollection<Logging>();
         for (Object logClass : logClasses) {
             for (Method method : logClass.getClass().getMethods()) {
                 if (method.isAnnotationPresent(LogFunction.class)) {
@@ -54,7 +54,8 @@ public class LogGenerator implements Runnable {
                         throw new IllegalStateException("Method " + method.getName() + " on class " + logClass.getClass().getSimpleName() + " must not have parameters");
                     }
                     LOG.info("Adding " + method.getName());
-                    logging.add(new Logging(method.getAnnotation(LogFunction.class), method, logClass));
+                    LogFunction annotation = method.getAnnotation(LogFunction.class);
+                    logging.add(annotation.weight(), new Logging(annotation, method, logClass));
                 }
             }
         }
