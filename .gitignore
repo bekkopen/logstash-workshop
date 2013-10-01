@@ -1,6 +1,7 @@
 data/
 target/
 logstash*.jar
+learning.log*
 
 
 .idea/
