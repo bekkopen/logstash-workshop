@@ -17,7 +17,7 @@ public class SomeDao {
         LOG.info("Finding user in db, took " + RandomUtils.randomTime(40) + " ms");
     }
 
-    @LogFunction(weight = 0.0001)
+    @LogFunction(weight = 0.05)
     public void criticalDatabaseFailure() {
         LOG.error("CRITICAL FAILURE, database unavailable", new IllegalStateException("Lost connection to database",
                 new SQLException("Connection reset", "-1", ThreadLocalRandom.current().nextInt(1, 9999))));

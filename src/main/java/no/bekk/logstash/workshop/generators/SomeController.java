@@ -32,7 +32,7 @@ public class SomeController {
         LOG.info("Showing home page for " + names.next() + " which took " + randomTime(300) + " ms to generate");
     }
 
-    @LogFunction(weight = 0.01d)
+    @LogFunction(weight = 0.1d)
     public void showErrorPage() {
         LOG.warn("Got exception while processing request", new RuntimeException("Whooa, an error happened", new RuntimeException()));
     }

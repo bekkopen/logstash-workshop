@@ -4,14 +4,14 @@
 
     <appender name="consoleAppender" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{ISO8601} [%15.15t] %-5p %30.30c %x - %m%n"/>
+            <param name="ConversionPattern" value="%d{ISO8601} [%t] %p %c - %m%n"/>
         </layout>
     </appender>
 
     <appender name="fileAppender" class="org.apache.log4j.RollingFileAppender">
         <param name="file" value="learning.log"/>
         <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="%d{ISO8601} [%15.15t] %-5p %30.30c %x - %m%n"/>
+            <param name="ConversionPattern" value="%d{ISO8601} [%t] %p %c - %m%n"/>
         </layout>
     </appender>
 
