@@ -1,7 +1,9 @@
 package no.bekk.logstash.workshop.log;
 
-import no.bekk.logstash.workshop.RandomCollection;
+import no.bekk.logstash.workshop.RandomWeighedCollection;
 import no.bekk.logstash.workshop.generators.SomeController;
+import no.bekk.logstash.workshop.generators.SomeDao;
+import no.bekk.logstash.workshop.generators.SomeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,11 +17,13 @@ public class LogGenerator implements Runnable {
 
     public static Logger LOG = LoggerFactory.getLogger(LogGenerator.class);
 
-    private final RandomCollection<Logging> logging;
+    private final RandomWeighedCollection<Logging> logging;
 
     public LogGenerator() {
         List<?> logClasses = asList(
-                new SomeController()
+                new SomeController(),
+                new SomeService(),
+                new SomeDao()
         );
 
         this.logging = findLogFunctions(logClasses);
@@ -45,8 +49,8 @@ public class LogGenerator implements Runnable {
         LOG.info("Interrupted logging thread, shutting down");
     }
 
-    private RandomCollection<Logging> findLogFunctions(List<?> logClasses) {
-        RandomCollection<Logging> logging = new RandomCollection<Logging>();
+    private RandomWeighedCollection<Logging> findLogFunctions(List<?> logClasses) {
+        RandomWeighedCollection<Logging> logging = new RandomWeighedCollection<Logging>();
         for (Object logClass : logClasses) {
             for (Method method : logClass.getClass().getMethods()) {
                 if (method.isAnnotationPresent(LogFunction.class)) {

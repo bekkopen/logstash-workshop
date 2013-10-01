@@ -1,21 +1,19 @@
 package no.bekk.logstash.workshop;
 
-import java.util.NavigableMap;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomCollection<E> {
-    private final NavigableMap<Double, E> map = new TreeMap<Double, E>();
-    private double total = 0;
 
-    public void add(double weight, E result) {
-        if (weight <= 0) return;
-        total += weight;
-        map.put(total, result);
+    private final ArrayList<E> list = new ArrayList<E>();
+
+    public RandomCollection(Collection<? extends E> input) {
+        list.addAll(input);
     }
 
     public E next() {
-        double value = ThreadLocalRandom.current().nextDouble() * total;
-        return map.ceilingEntry(value).getValue();
+        int value = ThreadLocalRandom.current().nextInt(0, list.size());
+        return list.get(value);
     }
 }
