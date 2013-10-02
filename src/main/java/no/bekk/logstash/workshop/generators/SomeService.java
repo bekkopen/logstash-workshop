@@ -1,6 +1,7 @@
 package no.bekk.logstash.workshop.generators;
 
 import no.bekk.logstash.workshop.log.LogFunction;
+import no.bekk.logstash.workshop.random.Debug;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,11 @@ public class SomeService {
     @LogFunction(weight = 0.1d)
     public void userMissingPhoneNumber() {
         LOG.warn("The user is missing phone number");
+    }
+
+    @LogFunction(weight = 3d)
+    public void debugLogging() {
+        LOG.debug(Debug.debugMessages.next());
     }
 
 }
