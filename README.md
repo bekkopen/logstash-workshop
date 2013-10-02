@@ -31,7 +31,7 @@ This project supplies an application which logs extensively, into a file called 
 Tasks
 =====
 
-1. Start logstash with the config above, write somthing in the console, and check that it shows up in Kibana.
+1. Start logstash with the config above, write somthing in the console you are running the logstash agent in, and check that it shows up in Kibana.
 1. Read the logfile from the application (learning.log). Hint: Use the [file-module](http://logstash.net/docs/1.2.1/inputs/file)
 1. Java prints stacktraces on multiple lines. This should only be one log statement in logstash. Hint: Use the [multiline-module](http://logstash.net/docs/1.2.1/codecs/multiline)
 1. We want each log part of the logfile (ie. loglevel, class, etc) in a seperate field, and to use the timestamp from each line. Hint: Use [grok-module](http://logstash.net/docs/1.2.1/filters/grok) to parse each line
