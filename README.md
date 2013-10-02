@@ -6,7 +6,7 @@ Startup
 1. Save the config file below, and change the cluster name for ElasticSearch
 1. Start Kibana: ```java -jar logstash-1.2.1-flatjar.jar web```
 1. Start Logstash: ```java -jar logstash-1.2.1-flatjar.jar agent -v -f logstash.conf```
-1. Open Kibana 3 (the dashboard) on [http://localhost:9292]
+1. Open Kibana 3 (the dashboard) on [http://localhost:9292]()
 
 
 Example config (logstash.conf):
